@@ -1,21 +1,21 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed } from "vue";
 
 const props = defineProps<{
   modelValue: string;
   errorMessage?: string;
 }>();
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: string): void;
+  (e: "update:modelValue", value: string): void;
 }>();
 
 const handleChange = (e: Event) => {
   const target = e.target as HTMLInputElement;
-  emit('update:modelValue', target.value);
+  emit("update:modelValue", target.value);
 };
 
 const styles = computed(() => ({
-  'input--error': !!props.errorMessage,
+  "input--error": !!props.errorMessage,
 }));
 </script>
 

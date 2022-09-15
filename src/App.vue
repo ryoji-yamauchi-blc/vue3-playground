@@ -1,8 +1,8 @@
 x
 <script setup lang="ts">
-import { ref } from 'vue';
-import UserForm from './components/UserForm.vue';
-import type { UserFormValues } from './components/UserForm.vue';
+import { ref } from "vue";
+import UserForm from "./components/UserForm.vue";
+import type { UserFormValues } from "./components/UserForm.vue";
 
 const submitResult = ref<UserFormValues | null>(null);
 const handleSubmit = (formValues: UserFormValues) => {

@@ -11,10 +11,7 @@ const props = defineProps<{
 }>();
 
 const nameRef = toRef(props, "name");
-const { value, errorMessage } = useField<string>(
-  nameRef,
-  props.rules,
-);
+const { value, errorMessage } = useField<string>(nameRef, props.rules);
 </script>
 
 <template>
