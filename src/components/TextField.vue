@@ -2,8 +2,10 @@
 import { computed } from "vue";
 
 const props = defineProps<{
+  name: string;
   modelValue: string;
   errorMessage?: string;
+  syncRef?: (el: any | null, name: string) => void;
 }>();
 const emit = defineEmits<{
   (e: "update:modelValue", value: string): void;
@@ -33,6 +35,7 @@ export default {
       type="text"
       :value="props.modelValue"
       @input="handleChange"
+      :ref="(ref) => props.syncRef && props.syncRef(ref, props.name)"
       v-bind="$attrs"
     />
     <div class="error-message">{{ props.errorMessage }}</div>
