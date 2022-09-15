@@ -9,7 +9,6 @@ export type UserFormValues = {
   name: string;
 };
 
-const props = defineProps<{ initialValue: UserFormValues }>();
 const emit = defineEmits<{ (e: "submit", formValues: UserFormValues): void }>();
 
 const validationSchema = toFormValidator(

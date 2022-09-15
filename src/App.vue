@@ -12,7 +12,7 @@ const handleSubmit = (formValues: UserFormValues) => {
 
 <template>
   <div>
-    <UserForm :initial-value="defaultValues" @submit="handleSubmit" />
+    <UserForm @submit="handleSubmit" />
     <div>フォームの値</div>
     <code>{{ submitResult }}</code>
   </div>
