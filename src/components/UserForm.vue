@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { InvalidSubmissionContext } from "vee-validate";
 import * as zod from "zod";
 import { useForm } from "vee-validate";
 import { toFormValidator } from "@vee-validate/zod";
@@ -22,16 +23,17 @@ const validationSchema = toFormValidator(
 
 const { handleSubmit } = useForm<UserFormValues>({ validationSchema });
 
-const onSubmit = handleSubmit(
-  (formValues) => {
-    emit("submit", formValues);
-  },
-  (ctx) => {
-    const firstErrorKey = Object.keys(ctx.values)[0];
-    const el = document.querySelector(`input[name=${firstErrorKey}]`);
-    el instanceof HTMLElement && el.focus();
-  }
-);
+const onError = (ctx: InvalidSubmissionContext<UserFormValues>) => {
+  const firstErrorKey = Object.keys(ctx.errors)[0];
+  const el = document.querySelector(
+    `input[name=${firstErrorKey}],select[name=${firstErrorKey}],textarea[name=${firstErrorKey}]`
+  );
+  el instanceof HTMLElement && el.focus();
+};
+
+const onSubmit = handleSubmit((formValues) => {
+  emit("submit", formValues);
+}, onError);
 </script>
 
 <template>
