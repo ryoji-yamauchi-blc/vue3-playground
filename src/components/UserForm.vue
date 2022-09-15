@@ -22,9 +22,16 @@ const validationSchema = toFormValidator(
 
 const { handleSubmit } = useForm<UserFormValues>({ validationSchema });
 
-const onSubmit = handleSubmit((formValues) => {
-  emit("submit", formValues);
-});
+const onSubmit = handleSubmit(
+  (formValues) => {
+    emit("submit", formValues);
+  },
+  (ctx) => {
+    const firstErrorKey = Object.keys(ctx.values)[0];
+    const el = document.querySelector(`input[name=${firstErrorKey}]`);
+    el instanceof HTMLElement && el.focus();
+  }
+);
 </script>
 
 <template>

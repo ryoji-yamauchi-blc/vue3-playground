@@ -15,5 +15,5 @@ const { value, errorMessage } = useField<string>(nameRef, props.rules);
 </script>
 
 <template>
-  <TextField v-model="value" :errorMessage="errorMessage" />
+  <TextField :name="props.name" v-model="value" :errorMessage="errorMessage" />
 </template>
