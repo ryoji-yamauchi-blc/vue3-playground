@@ -3,6 +3,7 @@ x
 import { ref } from "vue";
 import UserForm from "./components/UserForm.vue";
 import type { UserFormValues } from "./components/UserForm.vue";
+import SampleElForm from "./components/SampleElForm.vue";
 
 const submitResult = ref<UserFormValues | null>(null);
 const handleSubmit = (formValues: UserFormValues) => {
@@ -13,6 +14,7 @@ const handleSubmit = (formValues: UserFormValues) => {
 <template>
   <div>
     <UserForm @submit="handleSubmit" />
+    <SampleElForm />
     <div>フォームの値</div>
     <code>{{ submitResult }}</code>
   </div>
