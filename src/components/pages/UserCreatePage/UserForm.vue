@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import * as zod from "zod";
 import { useForm } from "vee-validate";
 import { toFormValidator } from "@vee-validate/zod";
@@ -27,7 +28,7 @@ const { handleSubmit } = useForm<UserFormValues>({
   },
 });
 
-const onSubmit = handleSubmit((formValues) => {
+const onSubmit = handleSubmit(async (formValues) => {
   emit("submit", formValues);
 });
 </script>

@@ -6,12 +6,12 @@ import {
   type RenderResult,
 } from "@testing-library/vue";
 import UserCreatePage from "@/components/pages/UserCreatePage/UserCreatePage.vue";
-import { client } from "@/api/client";
+import axios from "axios";
 
 // APIクライアントのモック
-vi.mock("@/api/client", () => {
+vi.mock("axios", () => {
   return {
-    client: {
+    default: {
       post: vi.fn(
         () => new Promise((resolve) => setTimeout(() => resolve({}), 1000))
       ),
@@ -60,9 +60,11 @@ describe("ユーザーフォームのテスト", () => {
     const submitButton = methods.getByText("submit");
     await fireEvent.click(submitButton);
     await methods.findByText("...登録中");
-    expect(client.post).toHaveBeenCalledWith("/users", {
-      id: "Nomura",
-      name: "野村",
+    expect(axios.post).toHaveBeenCalledWith("/users", {
+      params: {
+        id: "Nomura",
+        name: "野村",
+      },
     });
   });
 });
