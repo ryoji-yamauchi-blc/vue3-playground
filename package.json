@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
+    "test:unit": "vitest",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -16,9 +17,14 @@
     "zod": "^3.19.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/vue": "^6.6.1",
     "@vitejs/plugin-vue": "^3.0.1",
+    "@vue/tsconfig": "^0.1.3",
+    "jsdom": "^20.0.2",
     "typescript": "^4.6.4",
     "vite": "^3.0.2",
+    "vitest": "^0.25.0",
     "vue-tsc": "^0.39.0"
   }
 }
