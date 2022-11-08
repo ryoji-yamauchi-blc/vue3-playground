@@ -1,20 +1,10 @@
-x
 <script setup lang="ts">
-import { ref } from "vue";
-import UserForm from "./components/UserForm.vue";
-import type { UserFormValues } from "./components/UserForm.vue";
-
-const submitResult = ref<UserFormValues | null>(null);
-const handleSubmit = (formValues: UserFormValues) => {
-  submitResult.value = formValues;
-};
+import UserCreatePage from "@/components/pages/UserCreatePage/UserCreatePage.vue";
 </script>
 
 <template>
   <div>
-    <UserForm @submit="handleSubmit" />
-    <div>フォームの値</div>
-    <code>{{ submitResult }}</code>
+    <UserCreatePage />
   </div>
 </template>
 

@@ -9,18 +9,23 @@ export type UserFormValues = {
   name: string;
 };
 
+defineProps<{ isMutating: boolean }>();
 const emit = defineEmits<{ (e: "submit", formValues: UserFormValues): void }>();
 
 const validationSchema = toFormValidator(
   zod.object({
-    id: zod
-      .string({ required_error: "入力してください。" })
-      .min(5, "5文字以上で入力してください。"),
-    name: zod.string({ required_error: "入力してください。" }),
+    id: zod.string().min(1, "入力してください。"),
+    name: zod.string().min(1, "入力してください。"),
   })
 );
 
-const { handleSubmit } = useForm<UserFormValues>({ validationSchema });
+const { handleSubmit } = useForm<UserFormValues>({
+  validationSchema,
+  initialValues: {
+    id: "",
+    name: "",
+  },
+});
 
 const onSubmit = handleSubmit((formValues) => {
   emit("submit", formValues);
@@ -29,9 +34,18 @@ const onSubmit = handleSubmit((formValues) => {
 
 <template>
   <form @submit="onSubmit">
-    <FormTextField name="id" placeholder="id" />
-    <FormTextField name="name" placeholder="name" />
-    <button type="submit">submit</button>
+    <div>
+      <label for="id">ユーザID</label>
+      <FormTextField name="id" placeholder="eg) Nomura" id="id" />
+    </div>
+    <label>
+      <label for="name">名前</label>
+      <FormTextField name="name" placeholder="eg) 野村" id="name" />
+    </label>
+
+    <button type="submit" :disabled="isMutating">
+      {{ isMutating ? "...登録中" : "submit" }}
+    </button>
   </form>
 </template>
 
